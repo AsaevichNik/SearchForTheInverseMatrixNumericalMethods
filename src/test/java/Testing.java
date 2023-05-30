@@ -51,7 +51,7 @@ public class Testing
 
         matrixInverse1[0][0] = 1;
         matrixInverse1[0][1] = -1;
-        matrixInverse1[0][2] = 0.1;
+        matrixInverse1[0][2] = 0;
 
         matrixInverse1[1][0] = -1;
         matrixInverse1[1][1] = 2;
@@ -73,29 +73,29 @@ public class Testing
         R = MatrixService.divMatrix(R, E);
         double[][] Z = MatrixService.divMatrix(matrixInverse, matrixInverse);
 
-        double zNorm = MatrixService.matr_inf_norm(Z);
+
+
+        MatrixService.UpTriangleMatrix(matrix);
+
+        MatrixService.reverseMatrix(matrix);
+
+        MatrixService.printMatrix(matrix);
+
+        MatrixService.reverse(matrix);
+
+        MatrixService.printMatrix(matrix);
+
+
+        double[][] arr = MatrixService.divMatrix(matrix, matrixInverse);
+
+
+        double zNorm = MatrixService.matr_inf_norm(matrix);
         double reverseNorm = MatrixService.matr_inf_norm(matrixInverse);
         double dzetta = zNorm/reverseNorm;
 
         double norm = MatrixService.matr_inf_norm(matrix);
 
-        MatrixService.UpTriangleMatrix(matrixInverse);
-
-        //MatrixService.printMatrix(matrixInverse);
-
-
-        MatrixService.reverseMatrix(matrixInverse);
-
-        MatrixService.printMatrix(matrixInverse);
-
-        MatrixService.reverse(matrixInverse);
-
-        MatrixService.printMatrix(matrixInverse);
-
-
-        double[][] arr = MatrixService.divMatrix(matrix, matrixInverse);
-
-        System.out.println(MatrixService.matr_inf_norm(arr));
+        //System.out.println(norm);
         System.out.println(zNorm);
         System.out.println(reverseNorm);
         System.out.println(dzetta);

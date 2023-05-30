@@ -83,11 +83,11 @@ public class MatrixService
             for(int i = k+1; i < size; i++)
             {
                 mod = Math.sqrt(arr[k][k] * arr[k][k] + arr[i][k] * arr[i][k]);
-                if(mod != 0) {
+                if(Double.compare(mod,0) != 0) {
                     sin = -arr[i][k] / mod;
                     cos = arr[k][k] / mod;
-                    System.out.println(sin);
-                    System.out.println(cos);
+                    //System.out.println(sin);
+                    //System.out.println(cos);
                 } else
                 {
                     return 0;
@@ -107,7 +107,6 @@ public class MatrixService
 
             }
         }
-        printMatrix(arr);
         return 1;
     }
 
@@ -117,25 +116,38 @@ public class MatrixService
         double[] arr = new double[upTriangle.length];
         for (int i = 0; i < upTriangle.length; i++)
         {
-            upTriangle[i][i] = 1./upTriangle[i][i];
+            upTriangle[i][i] = 1./upTriangle[i][i]; //right
         }
 
-        for (int i = arr.length-1; i >= 0; i--)
+        /*for (int i = 0; i >= arr.length-1; i++)
         {
             for(int j = i+1; j<arr.length; j++) {
                 arr[j] = upTriangle[i][j];
             }
+
             for(int j = i+1; j<arr.length; j++)
             {
-                sum =0.;
+                sum = -upTriangle[i][i]*upTriangle[i][j];
                 for (int k = i+1; k<j; k++)
                 {
-                    sum += arr[k]*upTriangle[k][j];
+                    sum -= upTriangle[i][k]*upTriangle[k][j];
                 }
-                upTriangle[i][j] = sum*upTriangle[i][i];
+                upTriangle[i][j] = sum*upTriangle[j][j];
+            }
+         }
+      */
+        for(int i = 0 ; i < upTriangle.length-1; i++)
+        {
+            for(int j = i + 1; j < upTriangle.length; j++)
+            {
+                sum = -upTriangle[i][i]*upTriangle[i][j];
+                for(int k = i+1; k < j; k++)
+                {
+                    sum -=upTriangle[i][k]*upTriangle[k][j];
+                }
+                upTriangle[i][j] = sum*upTriangle[j][j];
             }
         }
-            printMatrix(upTriangle);
         return 1;
     }
     public static int reverse(double[][] arr)
@@ -160,7 +172,7 @@ public class MatrixService
                 } else
                 {
                     cos = sigma[i] + 1.;
-                    sin = Math.sqrt(1 - cos*cos);
+                    sin = -Math.sqrt(1 - cos*cos);
                 }
                 for(int l = 0; l < arr.length; l++)
                 {
